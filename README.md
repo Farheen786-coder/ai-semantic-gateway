@@ -1,6 +1,14 @@
 # 🚀 AI Semantic Gateway
 
+[![Build & Test](https://github.com/YOUR_USERNAME/ai-semantic-gateway/actions/workflows/build.yml/badge.svg)](https://github.com/YOUR_USERNAME/ai-semantic-gateway/actions/workflows/build.yml)
+![C++20](https://img.shields.io/badge/C%2B%2B-20-blue)
+![Python](https://img.shields.io/badge/Python-3.11+-green)
+![React](https://img.shields.io/badge/React-19-61DAFB)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 A high-performance Agentic AI Gateway with semantic caching, RAG-augmented routing, and real-time telemetry.
+
+> **📐 [Architecture Diagrams](docs/architecture.md)** · **🧠 [Design Decisions](DESIGN.md)** · **📊 [Load Test](docs/load-test.js)**
 
 ## Architecture
 
@@ -94,6 +102,33 @@ npm run dev
 - `POST /v1/completions` - Generate completion
 - `GET /health` - Server health
 
+## Observability
+
+### Prometheus Metrics
+```bash
+curl http://localhost:8000/metrics
+```
+Returns Prometheus-compatible metrics:
+- `gateway_requests_total` — Total requests processed
+- `gateway_cache_hits_total` / `gateway_cache_misses_total` — Cache performance
+- `gateway_cache_hit_rate` — Current hit rate gauge
+- `gateway_tokens_saved_total` — Tokens saved via caching
+- `gateway_requests_by_route{model="fast_model|heavy_model|cache"}` — Routing distribution
+- `gateway_uptime_seconds` — Server uptime
+
+### OpenAPI Documentation
+FastAPI auto-generates interactive API docs:
+- **Swagger UI:** http://localhost:8000/docs
+- **ReDoc:** http://localhost:8000/redoc
+
+### Load Testing
+```bash
+# Install k6: https://k6.io/docs/get-started/installation/
+k6 run docs/load-test.js
+
+# Results saved to docs/load-test-results.json
+```
+
 ## Testing
 
 ```bash
@@ -106,6 +141,9 @@ curl -X POST http://localhost:8000/process \
 curl -X POST http://localhost:9001/v1/completions \
   -H "Content-Type: application/json" \
   -d '{"prompt": "Hello world"}'
+
+# Check Prometheus metrics
+curl http://localhost:8000/metrics
 ```
 
 ## License
