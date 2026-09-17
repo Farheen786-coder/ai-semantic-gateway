@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - gateway-net
+
+  cpp-proxy:
+    build: ./cpp-proxy
+    ports:
+      - "8080:8080"
+      - "8081:8081/udp"
+    depends_on:
+      - redis
+      - mock-fast
+      - mock-heavy
+    networks:
+      - gateway-net
+
+  python-backend:
+    build: ./python-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    networks:
+      - gateway-net
+
+  mock-fast:
+    build: ./mock-servers
+    command: python mock_llm.py --port 9001 --type fast
+    ports:
+      - "9001:9001"
+    networks:
+      - gateway-net
+
+  mock-heavy:
+    build: ./mock-servers
+    command: python mock_llm.py --port 9002 --type heavy
+    ports:
+      - "9002:9002"
+    networks:
+      - gateway-net
+
+  dashboard:
+    build: ./telemetry-dashboard
+    ports:
+      - "5173:5173"
+    depends_on:
+      - cpp-proxy
+    networks:
+      - gateway-net
+
+volumes:
+  redis-data:
+
+networks:
+  gateway-net:
+    driver: bridge

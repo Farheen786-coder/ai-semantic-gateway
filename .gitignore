@@ -1,0 +1,12 @@
+node_modules/
+venv/
+__pycache__/
+*.pyc
+dist/
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+gateway_proxy
+package-lock.json
