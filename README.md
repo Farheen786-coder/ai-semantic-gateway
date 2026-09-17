@@ -1,6 +1,6 @@
 # 🚀 AI Semantic Gateway
 
-[![Build & Test](https://github.com/YOUR_USERNAME/ai-semantic-gateway/actions/workflows/build.yml/badge.svg)](https://github.com/YOUR_USERNAME/ai-semantic-gateway/actions/workflows/build.yml)
+[![Build & Test](https://github.com/Farheen786-coder/ai-semantic-gateway/actions/workflows/build.yml/badge.svg)](https://github.com/Farheen786-coder/ai-semantic-gateway/actions/workflows/build.yml)
 ![C++20](https://img.shields.io/badge/C%2B%2B-20-blue)
 ![Python](https://img.shields.io/badge/Python-3.11+-green)
 ![React](https://img.shields.io/badge/React-19-61DAFB)
