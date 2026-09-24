@@ -294,12 +294,3 @@ ai-semantic-gateway/
 
 MIT License — see [LICENSE](LICENSE) for details.
 
----
-
-<div align="center">
-
-**Built with ❤️ by [Farheen Rahman](https://github.com/Farheen786-coder)**
-
-*If this project helped you, consider giving it a ⭐*
-
-</div>
